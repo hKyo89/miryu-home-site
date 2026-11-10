@@ -175,6 +175,7 @@ button.button { font-family: inherit; cursor: pointer; }
 .prompt-calendar { --scene-color: #ffb998; }
 .prompt-rates { --scene-color: #77edbb; }
 .prompt-karaoke { --scene-color: #f4a5e0; }
+.prompt-camera { --scene-color: #9eafff; }
 .prompt-copy { z-index: 1; }
 .prompt-copy .eyebrow { color: var(--scene-color); }
 .prompt-quote {
