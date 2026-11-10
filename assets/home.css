@@ -100,4 +100,5 @@ h2 { font-size: clamp(2.25rem, 4.5vw, 4rem); }
 }
 @media (prefers-reduced-motion: reduce) {
   :root { scroll-behavior: auto; }
+  .luna-visual { background: linear-gradient(135deg, var(--ui-raised), var(--ui-panel)); }
 }
