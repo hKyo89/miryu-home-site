@@ -292,3 +292,65 @@ function setupNetwork() {
 setupPromptStory();
 setupHeadline();
 setupNetwork();
+
+function setupConnectionDemo() {
+  const demo = document.querySelector(".connection-demo");
+  const scenarios = demo.querySelector(".demo-scenarios");
+  const button = demo.querySelector(".demo-action");
+  const action = button.querySelector("[data-demo-action]");
+  const source = demo.querySelector("[data-demo-source]");
+  const result = demo.querySelector("[data-demo-result]");
+  const description = demo.querySelector("[data-demo-description]");
+  const status = demo.querySelector("[data-demo-status]");
+  const examples = {
+    scene: {
+      source: "Movie Night scene",
+      ready: "Lights at 100%",
+      result: "Lights at 20%",
+      description: "Run a saved scene to dim the lights and get the living room ready for a movie.",
+      action: "Run Movie Night",
+      status: "Scene active. The living room lights are dimmed.",
+    },
+    guest: {
+      source: "Guest invitation",
+      ready: "Guest view closed",
+      result: "Lights and karaoke only",
+      description: "Share groceries and school calendars with family. Give guests access to selected controls while cameras and household spending stay private.",
+      action: "Preview guest view",
+      status: "Guest view is open. Only the selected controls are visible.",
+    },
+    device: {
+      source: "Compatible entry sensor",
+      ready: "Sensor not connected",
+      result: "Entry sensor available",
+      description: "We can help set up your server and network. Try connecting a compatible entry sensor so it can trigger an automation.",
+      action: "Connect entry sensor",
+      status: "Sensor connected. Its events can now trigger a scene.",
+    },
+  };
+  let example;
+
+  function render(applied) {
+    demo.toggleAttribute("data-applied", applied);
+    source.textContent = example.source;
+    result.textContent = applied ? example.result : example.ready;
+    description.textContent = example.description;
+    status.textContent = applied ? example.status : "";
+    action.textContent = applied ? "Reset demo" : example.action;
+  }
+
+  function selectScenario() {
+    const selection = scenarios.querySelector("input:checked").value;
+    demo.dataset.scenario = selection;
+    example = examples[selection];
+    render(false);
+  }
+
+  scenarios.addEventListener("change", selectScenario);
+  button.addEventListener("click", () => render(!demo.hasAttribute("data-applied")));
+  selectScenario();
+  scenarios.hidden = false;
+  button.hidden = false;
+}
+
+setupConnectionDemo();
