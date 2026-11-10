@@ -4,10 +4,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Miryu Home | An AI-powered house</title>
-  <meta name="description" content="One app for your connected home. Meet Luna, your home AI powered by OpenAI, with local controls and automations running on your own home server.">
+  <meta name="description" content="One app for your connected home. Meet Luna, your home AI assistant, with local controls and automations running on your own home server.">
   <link rel="canonical" href="https://home.miryuapp.com/">
   <link rel="icon" href="./assets/home.png" type="image/png">
-  <link rel="stylesheet" href="./assets/home.css">
+  <link rel="stylesheet" href="./assets/home.css?v=2">
+  <script type="module" src="./assets/home-motion.js"></script>
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
@@ -23,8 +24,8 @@
   <main id="main">
     <section class="hero shell" aria-labelledby="hero-title">
       <div class="hero-copy">
-        <p class="eyebrow"><span class="signal"></span> MIRYU HOME · POWERED BY OPENAI</p>
-        <h1 id="hero-title">An AI-powered house.<br><span>One app to run it.</span></h1>
+        <p class="eyebrow"><span class="signal"></span> THE AI-POWERED HOME</p>
+        <h1 id="hero-title">Your whole home.<br><span>One AI brain.</span></h1>
         <p class="lede">Check the cameras, dim the lights, and see what’s on the family calendar from one app. Luna brings your connected home together, and your home server keeps it running.</p>
         <div class="actions">
           <form method="post" action="https://home.miryu.app/talk-to-sales">
@@ -34,10 +35,19 @@
         </div>
       </div>
       <div class="luna-visual">
+        <div class="luna-scenery" aria-hidden="true"></div>
+        <canvas class="luna-network" aria-hidden="true"></canvas>
+        <div class="stage-label"><span class="signal"></span> THE HOME NETWORK</div>
+        <div class="luna-orbit" aria-hidden="true">
+          <span class="node node-lights">Lights</span>
+          <span class="node node-camera">Cameras</span>
+          <span class="node node-scenes">Scenes</span>
+          <span class="node node-calendar">Calendar</span>
+        </div>
         <img class="portrait" src="./assets/luna-portrait.png" alt="Luna, Miryu Home’s AI assistant" width="512" height="512" fetchpriority="high">
         <div class="luna-caption">
           <div><strong>Luna</strong><span>Your home’s AI brain</span></div>
-          <span class="tag">Powered by OpenAI</span>
+          <span class="tag">Connected at home</span>
         </div>
       </div>
     </section>
@@ -48,12 +58,17 @@
         <h2 id="luna-title">Talk to your home.</h2>
         <p>Ask Luna what’s happening, get help with everyday tasks, or ask a general question. Here are a few ways a conversation could start. Questions about current information depend on an available data source.</p>
       </div>
+      <div class="prompt-toolbar">
+        <span class="eyebrow">EXAMPLE PROMPTS</span>
+        <button class="prompt-motion" type="button" hidden>Replay typing</button>
+      </div>
       <div class="prompt-grid">
         <article><span>Connected devices</span><p>“Which lights are still on?”</p></article>
         <article><span>Scenes</span><p>“Start Movie Night.”</p></article>
         <article><span>Family calendar</span><p>“What’s on the kids’ schedule tomorrow?”</p></article>
         <article><span>General questions</span><p>“What’s the USD to IDR exchange rate today?”</p></article>
       </div>
+      <p class="provider-note"><strong>Choose a compatible AI provider.</strong> Ask us about options such as OpenAI, Claude, or Grok for your setup.</p>
     </section>
 
     <section class="section shell" id="connected" aria-labelledby="connected-title">
@@ -85,7 +100,7 @@
         </div>
         <div class="server-details">
           <div><strong>On your home network</strong><p>Local integrations can keep doing their jobs during an internet outage.</p></div>
-          <div><strong>Away from home</strong><p>Connect securely through the same app when your home is online. Luna’s OpenAI features and live lookups also need internet access.</p></div>
+          <div><strong>Away from home</strong><p>Connect securely through the same app when your home is online. Cloud AI features and live lookups also need internet access.</p></div>
         </div>
       </div>
     </section>
