@@ -149,8 +149,8 @@ button.button { font-family: inherit; cursor: pointer; }
   position: absolute; left: 0; top: 0;
   transform: translate3d(var(--x), var(--y), 0) translate(-50%, -50%) scale(var(--depth));
 }
-.prompt-story { --prompt-top: clamp(12px, calc((100svh - 460px) / 2), 150px); }
-.prompt-sticky { position: relative; }
+.prompt-story { --prompt-top: clamp(12px, calc((100svh - 680px) / 4), 60px); }
+.prompt-sticky, .prompt-stage { position: relative; }
 .prompt-story[data-scroll-story] .prompt-sticky { position: sticky; top: var(--prompt-top); }
 .prompt-progress {
   position: absolute; z-index: 2; inset: 20px auto 20px 1px;
@@ -179,7 +179,7 @@ button.button { font-family: inherit; cursor: pointer; }
   --scene-color: #59d8ff;
   position: relative; overflow: hidden; isolation: isolate;
   display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, .85fr);
-  align-items: center; gap: 24px; min-height: clamp(360px, 62svh, 610px);
+  align-items: center; gap: 24px; min-height: clamp(300px, 56svh, 570px);
   padding: clamp(22px, 5vw, 64px); border: 1px solid var(--ui-line);
   border-radius: 28px; background: var(--ui-panel);
 }
@@ -232,7 +232,7 @@ button.button { font-family: inherit; cursor: pointer; }
   .luna-caption strong { font-size: 16px; }
   .luna-caption span { font-size: 12px; }
   .prompt-story[data-scroll-story] .prompt-scene { padding-inline-start: 37px; }
-  .prompt-scene { grid-template-columns: minmax(0, 1fr); gap: 8px; min-height: 390px; padding: 19px; }
+  .prompt-scene { grid-template-columns: minmax(0, 1fr); gap: 8px; min-height: 350px; padding: 19px; }
   .prompt-art { width: min(69%, 220px); justify-self: center; }
   .prompt-description { font-size: 14px; margin-top: 12px; }
 }
@@ -248,4 +248,15 @@ button.button { font-family: inherit; cursor: pointer; }
 }
 @keyframes prompt-enter {
   from { opacity: .4; transform: translateY(6px); }
+}
+
+@media (max-height: 760px) {
+  .prompt-sticky .section-heading { margin-bottom: 14px; }
+  .prompt-sticky .section-heading .eyebrow { margin-bottom: 8px; }
+  .prompt-sticky .section-heading h2 { font-size: clamp(1.9rem, 4.5vw, 3rem); }
+  .prompt-sticky .section-heading > p:last-child { margin-top: 8px; font-size: .9rem; line-height: 1.45; }
+}
+@media (max-width: 760px) and (max-height: 700px) {
+  .prompt-scene { min-height: 290px; }
+  .prompt-art { width: min(62%, 160px); }
 }

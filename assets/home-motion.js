@@ -3,7 +3,8 @@ const motion = matchMedia("(prefers-reduced-motion: reduce)");
 function setupPromptStory() {
   const story = document.querySelector(".prompt-story");
   const panel = story.querySelector(".prompt-sticky");
-  const progress = story.querySelector(".prompt-progress");
+  const stage = panel.querySelector(".prompt-stage");
+  const progress = stage.querySelector(".prompt-progress");
   const buttons = [...progress.querySelectorAll("button")];
   const scenes = [...story.querySelectorAll(".prompt-scene")];
   let step;
@@ -87,7 +88,7 @@ function setupPromptStory() {
     visible = entry.isIntersecting;
     if (!visible) stopTyping();
     schedule();
-  }, { threshold: 0.34 }).observe(panel);
+  }, { threshold: 0.34 }).observe(stage);
   new ResizeObserver(measure).observe(panel);
   window.addEventListener("resize", measure);
   window.addEventListener("scroll", schedule, { passive: true });

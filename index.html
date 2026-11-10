@@ -7,8 +7,8 @@
   <meta name="description" content="One app for your connected home. Meet Luna, your home AI assistant, with local controls and automations running on your own home server.">
   <link rel="canonical" href="https://home.miryuapp.com/">
   <link rel="icon" href="./assets/home.png" type="image/png">
-  <link rel="stylesheet" href="./assets/home.css?v=6">
-  <script type="module" src="./assets/home-motion.js?v=5"></script>
+  <link rel="stylesheet" href="./assets/home.css?v=7">
+  <script type="module" src="./assets/home-motion.js?v=6"></script>
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
@@ -86,81 +86,83 @@
     </section>
 
     <section class="section shell" id="luna" aria-labelledby="luna-title">
-      <div class="section-heading">
-        <p class="eyebrow">01 / ASK LUNA</p>
-        <h2 id="luna-title">Talk to your home.</h2>
-        <p>Ask Luna what’s happening, get help with everyday tasks, or ask a general question. Here are a few ways a conversation could start. Questions about current information depend on an available data source.</p>
-      </div>
       <div class="prompt-story">
         <div class="prompt-sticky">
-          <nav class="prompt-progress" aria-label="Luna examples" hidden>
-            <button type="button" aria-label="Connected devices" aria-controls="prompt-light"></button>
-            <button type="button" aria-label="Scenes" aria-controls="prompt-movie"></button>
-            <button type="button" aria-label="Family calendar" aria-controls="prompt-calendar"></button>
-            <button type="button" aria-label="General questions" aria-controls="prompt-rates"></button>
-            <button type="button" aria-label="Karaoke" aria-controls="prompt-karaoke"></button>
-          </nav>
-          <div class="prompt-scenes">
-            <article id="prompt-light" class="prompt-scene prompt-light">
-              <div class="prompt-copy">
-                <span class="eyebrow">01 / CONNECTED DEVICES</span>
-                <p class="prompt-quote">“Which lights are still on?”</p>
-                <p class="prompt-description">See the state of connected lights and find out which rooms are still lit.</p>
-              </div>
-              <div class="prompt-art" aria-hidden="true">
-                <div class="prompt-art-orbit"></div>
-                <img src="./assets/luna-portrait.png" alt="" width="512" height="512" loading="lazy">
-                <svg viewBox="0 0 52 52" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 26a10 10 0 1 1 16 8c-3 2-4 5-4 7h-8c0-2-1-5-4-7a10 10 0 0 1 0-8ZM22 46h8M26 5v4M7 14l3 3m35-3-3 3M4 28h5m34 0h5"/></svg>
-              </div>
-            </article>
-            <article id="prompt-movie" class="prompt-scene prompt-movie">
-              <div class="prompt-copy">
-                <span class="eyebrow">02 / SCENES</span>
-                <p class="prompt-quote">“Start Movie Night.”</p>
-                <p class="prompt-description">Use a saved scene to set the mood across compatible devices.</p>
-              </div>
-              <div class="prompt-art" aria-hidden="true">
-                <div class="prompt-art-orbit"></div>
-                <img src="./assets/luna-portrait.png" alt="" width="512" height="512" loading="lazy">
-                <svg viewBox="0 0 52 52" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="10" width="40" height="31" rx="5"/><path d="M24 19l9 6-9 6zM18 46h16"/></svg>
-              </div>
-            </article>
-            <article id="prompt-calendar" class="prompt-scene prompt-calendar">
-              <div class="prompt-copy">
-                <span class="eyebrow">03 / FAMILY CALENDAR</span>
-                <p class="prompt-quote">“What’s on the kids’ schedule tomorrow?”</p>
-                <p class="prompt-description">Check the family calendar for classes, school events, and plans.</p>
-              </div>
-              <div class="prompt-art" aria-hidden="true">
-                <div class="prompt-art-orbit"></div>
-                <img src="./assets/luna-portrait.png" alt="" width="512" height="512" loading="lazy">
-                <svg viewBox="0 0 52 52" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="11" width="38" height="34" rx="5"/><path d="M7 21h38M17 7v9m18-9v9M18 33l5 5 11-11"/></svg>
-              </div>
-            </article>
-            <article id="prompt-rates" class="prompt-scene prompt-rates">
-              <div class="prompt-copy">
-                <span class="eyebrow">04 / GENERAL QUESTIONS</span>
-                <p class="prompt-quote">“What’s the USD to IDR exchange rate today?”</p>
-                <p class="prompt-description">Ask Luna for current information when a live data source is available.</p>
-              </div>
-              <div class="prompt-art" aria-hidden="true">
-                <div class="prompt-art-orbit"></div>
-                <img src="./assets/luna-portrait.png" alt="" width="512" height="512" loading="lazy">
-                <svg viewBox="0 0 52 52" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 37l11-11 8 5 16-17m-10 0h10v10M8 45h36"/></svg>
-              </div>
-            </article>
-            <article id="prompt-karaoke" class="prompt-scene prompt-karaoke">
-              <div class="prompt-copy">
-                <span class="eyebrow">05 / KARAOKE</span>
-                <p class="prompt-quote">“Find five songs like Richie Ren’s ‘Xin Tai Ruan’ and add them to karaoke.”</p>
-                <p class="prompt-description">Discover similar songs and queue available tracks for your next karaoke night.</p>
-              </div>
-              <div class="prompt-art" aria-hidden="true">
-                <div class="prompt-art-orbit"></div>
-                <img src="./assets/luna-portrait.png" alt="" width="512" height="512" loading="lazy">
-                <svg viewBox="0 0 52 52" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="20" y="6" width="12" height="24" rx="6"/><path d="M14 23a12 12 0 0 0 24 0M26 35v10m-8 0h16M8 12l4 3m32-3-4 3"/></svg>
-              </div>
-            </article>
+          <div class="section-heading">
+            <p class="eyebrow">01 / ASK LUNA</p>
+            <h2 id="luna-title">Talk to your home.</h2>
+            <p>Ask Luna what’s happening, get help with everyday tasks, or ask a general question. Here are a few ways a conversation could start. Questions about current information depend on an available data source.</p>
+          </div>
+          <div class="prompt-stage">
+            <nav class="prompt-progress" aria-label="Luna examples" hidden>
+              <button type="button" aria-label="Connected devices" aria-controls="prompt-light"></button>
+              <button type="button" aria-label="Scenes" aria-controls="prompt-movie"></button>
+              <button type="button" aria-label="Family calendar" aria-controls="prompt-calendar"></button>
+              <button type="button" aria-label="General questions" aria-controls="prompt-rates"></button>
+              <button type="button" aria-label="Karaoke" aria-controls="prompt-karaoke"></button>
+            </nav>
+            <div class="prompt-scenes">
+              <article id="prompt-light" class="prompt-scene prompt-light">
+                <div class="prompt-copy">
+                  <span class="eyebrow">01 / CONNECTED DEVICES</span>
+                  <p class="prompt-quote">“Which lights are still on?”</p>
+                  <p class="prompt-description">See the state of connected lights and find out which rooms are still lit.</p>
+                </div>
+                <div class="prompt-art" aria-hidden="true">
+                  <div class="prompt-art-orbit"></div>
+                  <img src="./assets/luna-portrait.png" alt="" width="512" height="512" loading="lazy">
+                  <svg viewBox="0 0 52 52" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 26a10 10 0 1 1 16 8c-3 2-4 5-4 7h-8c0-2-1-5-4-7a10 10 0 0 1 0-8ZM22 46h8M26 5v4M7 14l3 3m35-3-3 3M4 28h5m34 0h5"/></svg>
+                </div>
+              </article>
+              <article id="prompt-movie" class="prompt-scene prompt-movie">
+                <div class="prompt-copy">
+                  <span class="eyebrow">02 / SCENES</span>
+                  <p class="prompt-quote">“Start Movie Night.”</p>
+                  <p class="prompt-description">Use a saved scene to set the mood across compatible devices.</p>
+                </div>
+                <div class="prompt-art" aria-hidden="true">
+                  <div class="prompt-art-orbit"></div>
+                  <img src="./assets/luna-portrait.png" alt="" width="512" height="512" loading="lazy">
+                  <svg viewBox="0 0 52 52" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="10" width="40" height="31" rx="5"/><path d="M24 19l9 6-9 6zM18 46h16"/></svg>
+                </div>
+              </article>
+              <article id="prompt-calendar" class="prompt-scene prompt-calendar">
+                <div class="prompt-copy">
+                  <span class="eyebrow">03 / FAMILY CALENDAR</span>
+                  <p class="prompt-quote">“What’s on the kids’ schedule tomorrow?”</p>
+                  <p class="prompt-description">Check the family calendar for classes, school events, and plans.</p>
+                </div>
+                <div class="prompt-art" aria-hidden="true">
+                  <div class="prompt-art-orbit"></div>
+                  <img src="./assets/luna-portrait.png" alt="" width="512" height="512" loading="lazy">
+                  <svg viewBox="0 0 52 52" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="11" width="38" height="34" rx="5"/><path d="M7 21h38M17 7v9m18-9v9M18 33l5 5 11-11"/></svg>
+                </div>
+              </article>
+              <article id="prompt-rates" class="prompt-scene prompt-rates">
+                <div class="prompt-copy">
+                  <span class="eyebrow">04 / GENERAL QUESTIONS</span>
+                  <p class="prompt-quote">“What’s the USD to IDR exchange rate today?”</p>
+                  <p class="prompt-description">Ask Luna for current information when a live data source is available.</p>
+                </div>
+                <div class="prompt-art" aria-hidden="true">
+                  <div class="prompt-art-orbit"></div>
+                  <img src="./assets/luna-portrait.png" alt="" width="512" height="512" loading="lazy">
+                  <svg viewBox="0 0 52 52" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 37l11-11 8 5 16-17m-10 0h10v10M8 45h36"/></svg>
+                </div>
+              </article>
+              <article id="prompt-karaoke" class="prompt-scene prompt-karaoke">
+                <div class="prompt-copy">
+                  <span class="eyebrow">05 / KARAOKE</span>
+                  <p class="prompt-quote">“Find five songs like Richie Ren’s ‘Xin Tai Ruan’ and add them to karaoke.”</p>
+                  <p class="prompt-description">Discover similar songs and queue available tracks for your next karaoke night.</p>
+                </div>
+                <div class="prompt-art" aria-hidden="true">
+                  <div class="prompt-art-orbit"></div>
+                  <img src="./assets/luna-portrait.png" alt="" width="512" height="512" loading="lazy">
+                  <svg viewBox="0 0 52 52" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="20" y="6" width="12" height="24" rx="6"/><path d="M14 23a12 12 0 0 0 24 0M26 35v10m-8 0h16M8 12l4 3m32-3-4 3"/></svg>
+                </div>
+              </article>
+            </div>
           </div>
         </div>
       </div>
