@@ -7,7 +7,7 @@
   <meta name="description" content="One app for your connected home. Meet Luna, your home AI assistant, with local controls and automations running on your own home server.">
   <link rel="canonical" href="https://home.miryuapp.com/">
   <link rel="icon" href="./assets/home.png" type="image/png">
-  <link rel="stylesheet" href="./assets/home.css?v=4">
+  <link rel="stylesheet" href="./assets/home.css?v=5">
   <script type="module" src="./assets/home-motion.js?v=4"></script>
 </head>
 <body>
@@ -93,12 +93,12 @@
       </div>
       <div class="prompt-story">
         <div class="prompt-sticky">
-          <a class="prompt-skip" href="#after-prompts">Skip examples <span aria-hidden="true">↓</span></a>
           <nav class="prompt-dots" aria-label="Luna examples" hidden>
             <button type="button" aria-label="Connected devices" aria-controls="prompt-light"></button>
             <button type="button" aria-label="Scenes" aria-controls="prompt-movie"></button>
             <button type="button" aria-label="Family calendar" aria-controls="prompt-calendar"></button>
             <button type="button" aria-label="General questions" aria-controls="prompt-rates"></button>
+            <button type="button" aria-label="Karaoke" aria-controls="prompt-karaoke"></button>
           </nav>
           <div class="prompt-scenes">
             <article id="prompt-light" class="prompt-scene prompt-light">
@@ -147,6 +147,18 @@
                 <div class="prompt-art-orbit"></div>
                 <img src="./assets/luna-portrait.png" alt="" width="512" height="512" loading="lazy">
                 <svg viewBox="0 0 52 52" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 37l11-11 8 5 16-17m-10 0h10v10M8 45h36"/></svg>
+              </div>
+            </article>
+            <article id="prompt-karaoke" class="prompt-scene prompt-karaoke">
+              <div class="prompt-copy">
+                <span class="eyebrow">05 / KARAOKE</span>
+                <p class="prompt-quote">“Find five songs like Richie Ren’s ‘Xin Tai Ruan’ and add them to karaoke.”</p>
+                <p class="prompt-description">Discover similar songs and queue available tracks for your next karaoke night.</p>
+              </div>
+              <div class="prompt-art" aria-hidden="true">
+                <div class="prompt-art-orbit"></div>
+                <img src="./assets/luna-portrait.png" alt="" width="512" height="512" loading="lazy">
+                <svg viewBox="0 0 52 52" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="20" y="6" width="12" height="24" rx="6"/><path d="M14 23a12 12 0 0 0 24 0M26 35v10m-8 0h16M8 12l4 3m32-3-4 3"/></svg>
               </div>
             </article>
           </div>

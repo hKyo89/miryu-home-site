@@ -150,13 +150,8 @@ button.button { font-family: inherit; cursor: pointer; }
   transform: translate3d(var(--x), var(--y), 0) translate(-50%, -50%) scale(var(--depth));
 }
 .prompt-story { --prompt-top: clamp(12px, calc((100svh - 460px) / 2), 150px); }
-.prompt-sticky { position: relative; padding-top: 40px; }
+.prompt-sticky { position: relative; }
 .prompt-story[data-scroll-story] .prompt-sticky { position: sticky; top: var(--prompt-top); }
-.prompt-skip {
-  position: absolute; right: 0; top: 0;
-  padding: 8px 12px; color: var(--ui-muted); font-size: 13px;
-}
-.prompt-skip:hover { color: var(--ui-secondary); }
 .prompt-dots {
   position: absolute; z-index: 1; left: 2px; top: 50%; transform: translateY(-50%);
   display: grid;
@@ -190,6 +185,7 @@ button.button { font-family: inherit; cursor: pointer; }
 .prompt-movie { --scene-color: #c496ff; }
 .prompt-calendar { --scene-color: #ffb998; }
 .prompt-rates { --scene-color: #77edbb; }
+.prompt-karaoke { --scene-color: #f4a5e0; }
 .prompt-copy { z-index: 1; }
 .prompt-copy .eyebrow { color: var(--scene-color); }
 .prompt-quote {
