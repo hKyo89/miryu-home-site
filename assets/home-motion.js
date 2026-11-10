@@ -3,8 +3,8 @@ const motion = matchMedia("(prefers-reduced-motion: reduce)");
 function setupPromptStory() {
   const story = document.querySelector(".prompt-story");
   const panel = story.querySelector(".prompt-sticky");
-  const dots = story.querySelector(".prompt-dots");
-  const buttons = [...dots.querySelectorAll("button")];
+  const progress = story.querySelector(".prompt-progress");
+  const buttons = [...progress.querySelectorAll("button")];
   const scenes = [...story.querySelectorAll(".prompt-scene")];
   let step;
   let active = -1;
@@ -42,7 +42,10 @@ function setupPromptStory() {
     frame = undefined;
     const top = parseFloat(getComputedStyle(panel).top);
     const offset = top - story.getBoundingClientRect().top;
-    const index = Math.max(0, Math.min(scenes.length - 1, Math.floor(offset / step)));
+    const position = Math.max(0, offset / step);
+    const index = Math.min(scenes.length - 1, Math.floor(position));
+    const fill = Math.min(1, (position + 0.5) / scenes.length);
+    progress.style.setProperty("--prompt-progress", fill.toFixed(3));
     if (index !== active) {
       stopTyping();
       typed = false;
@@ -69,7 +72,7 @@ function setupPromptStory() {
 
   if (!("IntersectionObserver" in window) || !("ResizeObserver" in window)) return;
   story.dataset.scrollStory = "";
-  dots.hidden = false;
+  progress.hidden = false;
   step = Math.max(220, Math.round(innerHeight * 0.59));
   update();
   measure();

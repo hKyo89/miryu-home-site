@@ -152,25 +152,29 @@ button.button { font-family: inherit; cursor: pointer; }
 .prompt-story { --prompt-top: clamp(12px, calc((100svh - 460px) / 2), 150px); }
 .prompt-sticky { position: relative; }
 .prompt-story[data-scroll-story] .prompt-sticky { position: sticky; top: var(--prompt-top); }
-.prompt-dots {
-  position: absolute; z-index: 1; left: 2px; top: 50%; transform: translateY(-50%);
-  display: grid;
+.prompt-progress {
+  position: absolute; z-index: 2; inset: 20px auto 20px 1px;
+  width: 34px; display: grid; grid-auto-rows: 1fr; gap: 0;
 }
-.prompt-dots[hidden] { display: none; }
-.prompt-dots button {
-  width: 36px; height: 44px; padding: 0; border: 0;
-  display: grid; place-items: center;
+.prompt-progress[hidden] { display: none; }
+.prompt-progress::before, .prompt-progress::after {
+  content: ""; position: absolute; inset: 0 auto 0 8px; width: 4px;
+  border-radius: 999px; pointer-events: none;
+}
+.prompt-progress::before { background: var(--ui-line); }
+.prompt-progress::after {
+  background: linear-gradient(var(--ui-secondary), #8498ff);
+  transform: scaleY(var(--prompt-progress, .1));
+  transform-origin: top;
+  box-shadow: 0 0 12px #28d4de55;
+}
+.prompt-progress button {
+  position: relative; width: 100%; min-height: 0;
+  padding: 0; border: 0; border-radius: 8px;
   background: transparent; cursor: pointer;
 }
-.prompt-dots button::before {
-  content: ""; width: 9px; height: 9px;
-  border: 1px solid var(--ui-muted); border-radius: 50%;
-}
-.prompt-dots button[aria-current="step"]::before {
-  background: var(--ui-secondary); border-color: var(--ui-secondary);
-  box-shadow: 0 0 14px #28d4de85;
-}
-.prompt-story[data-scroll-story] .prompt-scenes { margin-left: 44px; }
+.prompt-progress button:hover { background: #28d4de14; }
+.prompt-progress button:focus-visible { outline-offset: -2px; }
 .prompt-scene {
   --scene-color: #59d8ff;
   position: relative; overflow: hidden; isolation: isolate;
@@ -227,8 +231,7 @@ button.button { font-family: inherit; cursor: pointer; }
   .luna-identity picture { width: clamp(102px, 33vw, 175px); }
   .luna-caption strong { font-size: 16px; }
   .luna-caption span { font-size: 12px; }
-  .prompt-story[data-scroll-story] .prompt-scenes { margin-left: 34px; }
-  .prompt-dots { left: -7px; }
+  .prompt-story[data-scroll-story] .prompt-scene { padding-inline-start: 37px; }
   .prompt-scene { grid-template-columns: minmax(0, 1fr); gap: 8px; min-height: 390px; padding: 19px; }
   .prompt-art { width: min(69%, 220px); justify-self: center; }
   .prompt-description { font-size: 14px; margin-top: 12px; }
