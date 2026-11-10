@@ -1,68 +1,94 @@
 const motion = matchMedia("(prefers-reduced-motion: reduce)");
 
-function setupTyping() {
-  const grid = document.querySelector(".prompt-grid");
-  const button = document.querySelector(".prompt-motion");
-  const prompts = [...grid.querySelectorAll("article p")];
+function setupPromptStory() {
+  const story = document.querySelector(".prompt-story");
+  const panel = story.querySelector(".prompt-sticky");
+  const dots = story.querySelector(".prompt-dots");
+  const buttons = [...dots.querySelectorAll("button")];
+  const scenes = [...story.querySelectorAll(".prompt-scene")];
+  let step;
+  let active = -1;
+  let frame;
+  let visible = false;
+  let typed = false;
   let timeout;
 
-  function finish() {
+  function stopTyping() {
     clearTimeout(timeout);
-    for (const prompt of prompts) {
-      prompt.querySelector(".typed-copy")?.remove();
-      delete prompt.parentElement.dataset.typing;
-    }
-    button.textContent = "Replay typing";
+    panel.querySelector(".typed-copy")?.remove();
   }
 
-  function start() {
-    if (motion.matches) return;
-    button.hidden = false;
-    button.textContent = "Show all prompts";
+  function typePrompt() {
+    if (!visible || typed || active < 0 || motion.matches) return;
+    typed = true;
+    const quote = scenes[active].querySelector(".prompt-quote");
+    const letters = Array.from(quote.textContent);
+    const copy = document.createElement("span");
+    copy.className = "typed-copy";
+    copy.setAttribute("aria-hidden", "true");
+    quote.append(copy);
+    let index = 0;
 
-    const copies = prompts.map((prompt) => {
-      const text = Array.from(prompt.textContent);
-      const copy = document.createElement("span");
-      copy.className = "typed-copy";
-      copy.setAttribute("aria-hidden", "true");
-      prompt.append(copy);
-      return { prompt, text, copy };
+    function next() {
+      copy.textContent += letters[index++];
+      if (index < letters.length) timeout = setTimeout(next, 27);
+      else stopTyping();
+    }
+
+    timeout = setTimeout(next, 100);
+  }
+
+  function update() {
+    frame = undefined;
+    const top = parseFloat(getComputedStyle(panel).top);
+    const offset = top - story.getBoundingClientRect().top;
+    const index = Math.max(0, Math.min(scenes.length - 1, Math.floor(offset / step)));
+    if (index !== active) {
+      stopTyping();
+      typed = false;
+      active = index;
+      scenes.forEach((scene, i) => {
+        scene.hidden = i !== active;
+        if (i === active) buttons[i].setAttribute("aria-current", "step");
+        else buttons[i].removeAttribute("aria-current");
+      });
+    }
+    typePrompt();
+  }
+
+  function schedule() {
+    if (frame === undefined) frame = requestAnimationFrame(update);
+  }
+
+  function measure() {
+    step = Math.max(220, Math.round(innerHeight * 0.59));
+    const panelHeight = panel.offsetHeight;
+    story.style.minHeight = panelHeight + step * (scenes.length - 0.45) + "px";
+    schedule();
+  }
+
+  if (!("IntersectionObserver" in window) || !("ResizeObserver" in window)) return;
+  story.dataset.scrollStory = "";
+  dots.hidden = false;
+  step = Math.max(220, Math.round(innerHeight * 0.59));
+  update();
+  measure();
+  buttons.forEach((button, index) => {
+    button.addEventListener("click", () => {
+      const inset = parseFloat(getComputedStyle(panel).top);
+      const top = scrollY + story.getBoundingClientRect().top - inset + index * step + 2;
+      window.scrollTo({ top, behavior: "instant" });
     });
-
-    function type(index, count = 0) {
-      const { prompt, text, copy } = copies[index];
-      prompt.parentElement.dataset.typing = "";
-      copy.textContent = text.slice(0, count).join("");
-      if (count < text.length) {
-        timeout = setTimeout(() => type(index, count + 1), 25);
-        return;
-      }
-      copy.remove();
-      delete prompt.parentElement.dataset.typing;
-      if (index + 1 < copies.length) {
-        timeout = setTimeout(() => type(index + 1), 200);
-      } else {
-        finish();
-      }
-    }
-
-    type(0);
-  }
-
-  button.addEventListener("click", () => {
-    if (grid.querySelector(".typed-copy")) finish();
-    else start();
   });
-  motion.addEventListener("change", finish);
-
-  if ("IntersectionObserver" in window) {
-    const observer = new IntersectionObserver(([entry]) => {
-      if (!entry.isIntersecting) return;
-      observer.disconnect();
-      start();
-    }, { threshold: 0.25 });
-    observer.observe(grid);
-  }
+  new IntersectionObserver(([entry]) => {
+    visible = entry.isIntersecting;
+    if (!visible) stopTyping();
+    schedule();
+  }, { threshold: 0.34 }).observe(panel);
+  new ResizeObserver(measure).observe(panel);
+  window.addEventListener("resize", measure);
+  window.addEventListener("scroll", schedule, { passive: true });
+  motion.addEventListener("change", stopTyping);
 }
 
 const vertexSource = `
@@ -87,7 +113,7 @@ const fragmentSource = `
     vec3 light = vec3(0.0);
     for (int i = 0; i < 4; i++) {
       float track = 0.48 + 0.14 * float(i);
-      float heading = time * (0.9 + 0.19 * float(i)) + float(i) * 1.7;
+      float heading = time * (0.8 + 0.2 * float(i)) + float(i) * 1.7;
       float trail = pow(0.5 + 0.5 * cos(angle - heading), 18.0);
       float ring = exp(-abs(radius - track) * 145.0);
       vec2 dotPosition = track * vec2(cos(heading), sin(heading));
@@ -157,11 +183,17 @@ function setupStage() {
   const stage = document.querySelector(".luna-visual");
   const canvas = stage.querySelector("canvas");
   let draw = createNetwork(canvas);
+  const pause = stage.querySelector(".orbit-motion");
   let visible = true;
+  let paused = false;
+  let seconds = 0;
+  let previousFrame;
+  let lastDraw = -Infinity;
   let frame;
   let x = 0;
   let y = 0;
-  const started = performance.now();
+  stage.dataset.orbitFallback = draw ? "false" : "true";
+  pause.hidden = false;
 
   function render(now) {
     frame = undefined;
@@ -170,9 +202,15 @@ function setupStage() {
     stage.style.setProperty("--scroll-y", Math.max(-16, Math.min(16, offset)) + "px");
     stage.style.setProperty("--pointer-x", x * 16 + "px");
     stage.style.setProperty("--pointer-y", y * 16 + "px");
-    const elapsed = (now - started) / 1000;
-    draw?.(Math.min(elapsed, 4.5), x, y);
-    if (draw && elapsed < 4.5) schedule();
+    if (previousFrame !== undefined && !paused) {
+      seconds = (seconds + Math.min(now - previousFrame, 50) / 1000) % (10 * Math.PI);
+    }
+    previousFrame = now;
+    if (paused || now - lastDraw >= 30) {
+      draw?.(seconds, x, y);
+      lastDraw = now;
+    }
+    if (draw && !paused) schedule();
   }
 
   function schedule() {
@@ -190,12 +228,22 @@ function setupStage() {
     x = y = 0;
     schedule();
   });
+  pause.addEventListener("click", () => {
+    paused = !paused;
+    stage.dataset.orbitPaused = String(paused);
+    pause.textContent = paused ? "Play animation" : "Pause animation";
+    previousFrame = undefined;
+    schedule();
+  });
   canvas.addEventListener("webglcontextlost", () => {
     draw = null;
+    stage.dataset.orbitFallback = "true";
     canvas.hidden = true;
   });
   motion.addEventListener("change", () => {
     canvas.hidden = motion.matches || !draw;
+    pause.hidden = motion.matches;
+    previousFrame = undefined;
     schedule();
   });
   window.addEventListener("scroll", schedule, { passive: true });
@@ -204,11 +252,13 @@ function setupStage() {
   if ("IntersectionObserver" in window) {
     new IntersectionObserver(([entry]) => {
       visible = entry.isIntersecting;
+      stage.dataset.orbitOffscreen = String(!visible);
+      previousFrame = undefined;
       if (visible) schedule();
     }).observe(stage);
   }
   schedule();
 }
 
-setupTyping();
+setupPromptStory();
 setupStage();
